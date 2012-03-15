@@ -8,6 +8,14 @@ class Cell
     world.cells << self
   end
 
+  def die!
+    world.cells -= [self]
+  end
+
+  def dead?
+    !world.cells.include?(self)
+  end
+
   def neighbors
     @neighbors = []
     world.cells.each do |cell|
@@ -44,5 +52,13 @@ class World
 
   def initialize
     @cells = []
+  end
+
+  def tick!
+    cells.each do |cell|
+      if cell.neighbors.count < 2
+        cell.die!
+      end
+    end
   end
 end
