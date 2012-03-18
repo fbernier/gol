@@ -16,6 +16,10 @@ class Cell
     !world.cells.include?(self)
   end
 
+  def alive?
+    world.cells.include?(self)
+  end
+
   def neighbors
     @neighbors = []
     world.cells.each do |cell|
@@ -38,6 +42,30 @@ class Cell
       if self.x == cell.x + 1 && self.y == cell.y
         @neighbors << cell
       end
+
+      # Has a cell to the north-east
+      if self.x == cell.x - 1 && self.y == cell.y - 1
+        @neighbors << cell
+      end
+
+
+      # Has a cell to the north-west
+      if self.x == cell.x + 1 && self.y == cell.y - 1
+        @neighbors << cell
+      end
+
+
+      # Has a cell to the south-east
+      if self.x == cell.x - 1 && self.y == cell.y + 1
+        @neighbors << cell
+      end
+
+
+      # Has a cell to the south-west
+      if self.x == cell.x + 1 && self.y == cell.y + 1
+        @neighbors << cell
+      end
+
     end
     @neighbors
   end

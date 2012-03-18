@@ -25,6 +25,42 @@ describe 'Game of life' do
       subject.neighbors.count.should == 1
     end
 
+
+    it 'detects a neighbor to the east ' do
+      cell = subject.spawn_at(1,0)
+      subject.neighbors.count.should == 1
+    end
+
+
+    it 'detects a neighbor to the west ' do
+      cell = subject.spawn_at(-1,0)
+      subject.neighbors.count.should == 1
+    end
+
+
+    it 'detects a neighbor to the north-east ' do
+      cell = subject.spawn_at(1,1)
+      subject.neighbors.count.should == 1
+    end
+
+
+    it 'detects a neighbor to the north-west ' do
+      cell = subject.spawn_at(-1,1)
+      subject.neighbors.count.should == 1
+    end
+
+
+    it 'detects a neighbor to the south-east ' do
+      cell = subject.spawn_at(-1,1)
+      subject.neighbors.count.should == 1
+    end
+
+
+    it 'detects a neighbor to the south-west ' do
+      cell = subject.spawn_at(-1,-1)
+      subject.neighbors.count.should == 1
+    end
+
     it 'dies' do
       subject.die!
       subject.world.cells.should_not include(subject)
@@ -37,6 +73,13 @@ describe 'Game of life' do
     cell.neighbors.count.should == 0
     world.tick!
     cell.should be_dead
+  end
 
+  it 'Rule 2: Any live cell with two or three live neighbours lives on to the next generation.' do
+    cell = Cell.new(world)
+    new_cell = cell.spawn_at(1,0)
+    other_new_cell = cell.spawn_at(-1,0)
+    world.tick!
+    cell.should be_alive
   end
 end
