@@ -86,6 +86,8 @@ class World
     cells.each do |cell|
       if cell.neighbors.count < 2
         cell.die!
+      elsif cell.neighbors.count > 2
+        cell.die!
       end
     end
   end

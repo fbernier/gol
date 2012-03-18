@@ -82,4 +82,13 @@ describe 'Game of life' do
     world.tick!
     cell.should be_alive
   end
+
+  it 'Rule 3: Any live cell with more than three live neighbours dies, as if by overcrowding.' do
+    cell = Cell.new(world)
+    neighbour_1 = cell.spawn_at(1,0)
+    neighbour_2 = cell.spawn_at(-1,0)
+    neighbour_3 = cell.spawn_at(0,1)
+    world.tick!
+    cell.should be_dead
+  end
 end
